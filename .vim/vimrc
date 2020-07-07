@@ -1,0 +1,284 @@
+set nocompatible
+
+filetype plugin on
+filetype indent on
+syntax on
+colo slate
+
+set autoindent             " Indent according to previous line.
+set expandtab              " Use spaces instead of tabs.
+set softtabstop =4         " Tab key indents by 4 spaces.
+set shiftwidth  =4         " >> indents by 4 spaces.
+set shiftround             " >> indents to next multiple of 'shiftwidth'.
+
+set backspace   =indent,eol,start  " Make backspace work as you would expect.
+set hidden                 " Switch between buffers without having to save first.
+set laststatus  =2         " Always show statusline.
+set showtabline=2 " Always display the tabline, even if there is only one tab
+set display     =lastline  " Show as much as possible of the last line.
+
+set noshowmode               " don't Show current mode in command-line.
+set showcmd                " Show already typed keys when more are expected.
+
+set incsearch              " Highlight while searching with / or ?.
+set hlsearch               " Keep matches highlighted.
+set inc=nosplit
+set ignorecase            " ignores case during search(for one time append \c to search string)
+
+set ttyfast                " Faster redrawing.
+set lazyredraw             " Only redraw when necessary.
+
+set splitbelow             " Open new windows below the current window.
+set splitright             " Open new windows right of the current window.
+
+set cursorline             " Find the current line quickly.
+set wrapscan               " Searches wrap around end-of-file.
+set report      =0         " Always report changed lines.
+"   set synmaxcol   =200       " Only highlight the first 200 columns.
+set linebreak
+set formatoptions=l
+set breakindent
+
+set enc=utf-8
+set fileencoding=utf-8
+set fileencodings=ucs-bom,utf-8,prc
+
+" The fish shell is not very compatible to other shells and unexpectedly
+" breaks things that use 'shell'.
+if &shell =~# 'fish$'
+  set shell=/bin/bash
+endif
+
+" Put all temporary files under the same directory.
+" https://github.com/mhinz/vim-galore#handling-backup-swap-undo-and-viminfo-files
+set backup
+set backupdir   =$HOME/.vim/files/backup/
+set backupext   =-vimbackup
+set backupskip  =
+set directory   =$HOME/.vim/files/swap//
+set updatecount =100
+set undofile
+set undodir     =$HOME/.vim/files/undo/
+set viminfo     ='100,n$HOME/.vim/files/info/viminfo
+
+set nu rnu
+set clipboard=unnamedplus     " Make X regiser default
+set whichwrap=b,s,<,>,[,]     " Traverse line breaks with arrow keys
+set ruler                     " Show the cursor position
+set title                     " show filename in window titlebar
+set history=500               " Sets how many lines of history VIM has to remember
+
+" Strip trailing whitespace (,ss)
+function! StripWhitespace()
+    let save_cursor = getpos(".")
+    let old_query = getreg('/')
+    :%s/\s\+$//e
+    call setpos('.', save_cursor)
+    call setreg('/', old_query)
+endfunction
+
+" Set to auto read when a file is changed from the outside
+set autoread
+au FocusGained,BufEnter * checktime
+
+" set spell 
+"
+" Emulate Tmux ^az
+function ZoomWindow()
+    let cpos = getpos(".")
+    tabnew %
+    redraw
+    call cursor(cpos[1], cpos[2])
+    normal! zz
+endfunction
+nmap gz :call ZoomWindow()<CR>
+
+
+call plug#begin('~/.vim/plugged')
+    Plug 'vim-airline/vim-airline'
+    Plug 'vim-airline/vim-airline-themes'
+    "   Plug 'preservim/nerdcommenter'
+    "   Plug 'nathanaelkane/vim-indent-guides'
+    Plug 'scrooloose/nerdtree'
+    Plug 'w0rp/ale'
+    "   Plug 'scrooloose/syntastic'
+    Plug 'junegunn/vim-easy-align'
+    Plug 'luochen1990/rainbow'
+    Plug 'lervag/vimtex'
+    Plug 'tmhedberg/matchit'
+    Plug 'tpope/vim-surround'
+    "   Plug 'tpope/vim-fugitive'
+    "   Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    Plug 'ncm2/ncm2'
+    Plug 'ncm2/ncm2-path'
+    Plug 'ncm2/ncm2-bufword'
+    Plug 'gaalcaras/ncm-R'
+    Plug 'roxma/nvim-yarp'
+   "Plug 'SirVer/ultisnips'
+    Plug 'honza/vim-snippets'
+    Plug 'chrisbra/csv.vim'
+    Plug 'dpelle/vim-LanguageTool'
+    Plug 'jalvesaq/Nvim-R', {'branch': 'master'}
+   "Plug 'ncm2/ncm2-ultisnips'
+call plug#end()
+
+
+let mapleader = ","
+let maplocalleader = "\\"
+
+
+"""""""""""""""""""""""""""""""""""""""""""
+" DISABLE UNNECESSARY INTERNAL PLUGINS
+"""""""""""""""""""""""""""""""""""""""""""
+let g:loaded_2html_plugin = 1
+let g:loaded_getscriptPlugin = 1
+let g:loaded_gzip = 1
+let g:loaded_logipat = 1
+let g:loaded_rrhelper = 1
+let g:loaded_tarPlugin = 1
+let g:loaded_vimballPlugin = 1
+let g:loaded_zipPlugin = 1
+
+
+"""""""""""""""""""""""""""""""""""""""""""
+"               ULTISNIP                  "
+"""""""""""""""""""""""""""""""""""""""""""
+" <tab> Not compatible with github.com/Valloric/YouCompleteMe.
+"let g:UltiSnipsExpandTrigger="<tab>"
+"let g:UltiSnipsJumpForwardTrigger="<c-b>"
+"let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+"let g:UltiSnipsEditSplit="vertical"
+
+"""""""""""""""""""""""""""""""""""""""""""
+"            NERDCOMMENTER                "
+"""""""""""""""""""""""""""""""""""""""""""
+let g:NERDSpaceDelims = 1
+let g:NERDCompactSexyComs = 1
+let g:NERDTrimTrailingWhitespace = 1
+let g:NERDToggleCheckAllLines = 1
+
+
+"""""""""""""""""""""""""""""""""""""""""""
+"               INDENTGUIDES              "
+"""""""""""""""""""""""""""""""""""""""""""
+let g:indent_guides_enable_on_vim_startup = 1
+
+
+"""""""""""""""""""""""""""""""""""""""""""
+"                 RAINBOW                 "
+"""""""""""""""""""""""""""""""""""""""""""
+let g:rainbow_active = 1
+let g:rainbow_conf = {
+      \ 'guifgs': ['#f92672', '#00afff', '#268bd2', '#93a1a1', '#dc322f',
+      \   '#6c71c4', '#b58900', '#657b83', '#d33682', '#719e07', '#2aa198'],
+      \ 'ctermfgs': ['9', '127', '4', '1', '3', '12', '5', '2', '6', '33',
+      \   '104', '124', '7', '39'],
+      \}
+"""""""""""""""""""""""""""""""""""""""""""
+"                 VIMTEX                  "
+"""""""""""""""""""""""""""""""""""""""""""
+let g:tex_flavor='latex'
+
+if has('nvim')
+    let g:vimtex_compiler_progname='nvr'
+endif
+
+let g:vimtex_fold_enabled = 1
+"   if !exists('g:ycm_semantic_triggers')
+"     let g:ycm_semantic_triggers = {}
+"   endif
+"   au VimEnter * let g:ycm_semantic_triggers.tex=g:vimtex#re#youcompleteme
+
+"""""""""""""""""""""""""""""""""""""""""""
+"                 AIRLINE                 "
+"""""""""""""""""""""""""""""""""""""""""""
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#csv#column_display = 'Name'
+let g:airline_theme='molokai'
+
+"""""""""""""""""""""""""""""""""""""""""""
+"                    R                    "
+"""""""""""""""""""""""""""""""""""""""""""
+"   let R_external_term = 'st'
+let R_assign = 2
+let R_notmuxconf = 1
+let r_syntax_folding = 1
+let rrst_syn_hl_chunk = 1
+let rmd_syn_hl_chunk = 1
+let R_objbr_allnames = 1
+let R_objbr_place = 'console,below'
+
+augroup r
+    autocmd!
+    autocmd FileType r,rmd inoremap _+ <space><esc>gelcw<space>%>%<space>
+augroup end
+"""""""""""""""""""""""""""""""""""""""""""
+"              EASY_ALIGN                 "
+"""""""""""""""""""""""""""""""""""""""""""
+xmap        ga                  <Plug>(EasyAlign)
+nmap        ga                  <Plug>(EasyAlign)
+"
+"""""""""""""""""""""""""""""""""""""""""""
+"                  NCM2                   "
+"""""""""""""""""""""""""""""""""""""""""""
+
+au BufEnter * call ncm2#enable_for_buffer()
+au TextChangedI * call ncm2#auto_trigger()
+set completeopt=noinsert,menuone,noselect
+set shortmess+=c
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+"""""""""""""""""""""""""""""""""""""""""""
+
+
+noremap     <f1>                <esc>:h<space>
+noremap     <f2>                <esc>:set<space>
+
+noremap     <f5>                <esc>:bd<cr>
+noremap     <f6>                <esc>:bp<cr>
+noremap     <f7>                <esc>:bn<cr>
+noremap     <f8>                <esc>:bad<space>
+
+noremap     <f9>                <esc>:vertical resize -10<cr>
+noremap     <f10>               <esc>:resize -10<cr>
+noremap     <f11>               <esc>:resize +10<cr>
+noremap     <f12>               <esc>:vertical resize +10<cr>
+
+nnoremap <leader>h              <C-W>h
+nnoremap <leader>j              <C-W>j
+nnoremap <leader>k              <C-W>k
+nnoremap <leader>l              <C-W>l
+nnoremap <leader>w              :set wrap!<cr>
+
+"   nnoremap    Q                   <nop>
+"   nnoremap    <bs>                <nop>
+"   noremap     <left>              <nop>
+"   noremap     <right>             <nop>
+"   noremap     <up>                <nop>
+"   noremap     <down>              <nop>
+
+
+nnoremap    Y                   y$
+nnoremap    <leader>e           :e!<space>~/.vim/vimrc<cr>
+    autocmd! bufwritepost ~/.vim/vimrc source ~/.vim/vimrc
+nnoremap    oo                  o<Esc>k
+nnoremap    OO                  O<Esc>j
+nnoremap    <S-H>               ^
+nnoremap    <S-L>               $
+nnoremap    <C-L>               :nohlsearch<cr>:diffupdate<cr>:syntax sync fromstart<cr><c-l>
+inoremap    (*                  ()<esc>i
+inoremap    [*                  []<esc>i
+inoremap    {*                  {}<esc>i
+inoremap    <*                  <><esc>i
+inoremap    '*                  ''<esc>i
+inoremap    "*                  ""<esc>i
+cnoremap	<C-A>		<Home>
+cnoremap	<C-E>		<End>
+cnoremap	<C-K>		<C-U>
+cnoremap	<C-P>	        <Up>
+cnoremap	<C-N>	        <Down>
+iabbrev     @@                  she3sha3y5@gmail.com
+iabbrev     fn                  Anas M. Sheashaey 
+iabbrev     ssig                --<cr>Anas M. Sheashaey<cr>she3sha3y5@gmail.com<cr>
+
