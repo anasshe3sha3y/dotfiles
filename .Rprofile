@@ -14,7 +14,7 @@ adjust_cons_width <- function (out = TRUE) {
 }
 adjust_cons_width(FALSE)
 
-options(prompt = "R>>")
+options(prompt = "R>> ")
 
 #   UNIX commands
 cd <- setwd
