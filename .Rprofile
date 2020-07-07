@@ -1,8 +1,19 @@
 library(colorout)
-grDevices::X11.options(width = 4.5, height = 4, ypos = 0, xpos = 1000, pointsize = 10)
-#cd <- setwd
-#pwd <- getwd
-#h <- utils::head
-#man <- utils::help
-#l <- base::list
-#less <- function() options(pager = "less")
+
+adjust_cons_width <- function (out = TRUE) {
+
+    console_width <- system("tput cols", TRUE)
+    options(width = console_width)
+
+    if(out == TRUE){
+        print(console_width)
+    }
+
+}
+
+adjust_cons_width(FALSE)
+
+cd <- setwd
+pwd <- getwd
+h <- utils::head
+man <- utils::help
