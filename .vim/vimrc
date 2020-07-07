@@ -5,11 +5,11 @@ filetype indent on
 syntax on
 colo slate
 
-set autoindent             " Indent according to previous line.
+set autoindent
 set expandtab              " Use spaces instead of tabs.
 set softtabstop =4         " Tab key indents by 4 spaces.
-set shiftwidth  =4         " >> indents by 4 spaces.
-set shiftround             " >> indents to next multiple of 'shiftwidth'.
+set shiftwidth  =4         " indents by 4 spaces.
+set shiftround             " indents to next multiple of 'shiftwidth'.
 
 set backspace   =indent,eol,start  " Make backspace work as you would expect.
 set hidden                 " Switch between buffers without having to save first.
@@ -20,21 +20,21 @@ set display     =lastline  " Show as much as possible of the last line.
 set noshowmode               " don't Show current mode in command-line.
 set showcmd                " Show already typed keys when more are expected.
 
-set incsearch              " Highlight while searching with / or ?.
-set hlsearch               " Keep matches highlighted.
+set incsearch
+set hlsearch
 set inc=nosplit
-set ignorecase            " ignores case during search(for one time append \c to search string)
+set ignorecase
 
 set ttyfast                " Faster redrawing.
 set lazyredraw             " Only redraw when necessary.
 
-set splitbelow             " Open new windows below the current window.
-set splitright             " Open new windows right of the current window.
+set splitbelow
+set splitright
 
-set cursorline             " Find the current line quickly.
+set cursorline
 set wrapscan               " Searches wrap around end-of-file.
 set report      =0         " Always report changed lines.
-"   set synmaxcol   =200       " Only highlight the first 200 columns.
+set synmaxcol   =200       " Only highlight the first 200 columns.
 set linebreak
 set formatoptions=l
 set breakindent
@@ -62,11 +62,11 @@ set undodir     =$HOME/.vim/files/undo/
 set viminfo     ='100,n$HOME/.vim/files/info/viminfo
 
 set nu rnu
-set clipboard=unnamedplus     " Make X regiser default
+set clipboard=unnamedplus
 set whichwrap=b,s,<,>,[,]     " Traverse line breaks with arrow keys
-set ruler                     " Show the cursor position
-set title                     " show filename in window titlebar
-set history=500               " Sets how many lines of history VIM has to remember
+set ruler
+set title
+set history=500
 
 " Strip trailing whitespace (,ss)
 function! StripWhitespace()
@@ -81,8 +81,6 @@ endfunction
 set autoread
 au FocusGained,BufEnter * checktime
 
-" set spell 
-"
 " Emulate Tmux ^az
 function ZoomWindow()
     let cpos = getpos(".")
@@ -232,53 +230,45 @@ inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 """""""""""""""""""""""""""""""""""""""""""
 
 
-noremap     <f1>                <esc>:h<space>
-noremap     <f2>                <esc>:set<space>
+noremap         <f1>                <esc>:h<space>
+noremap         <f2>                <esc>:set<space>
 
-noremap     <f5>                <esc>:bd<cr>
-noremap     <f6>                <esc>:bp<cr>
-noremap     <f7>                <esc>:bn<cr>
-noremap     <f8>                <esc>:bad<space>
+noremap         <f5>                <esc>:bd<cr>
+noremap         <f6>                <esc>:bp<cr>
+noremap         <f7>                <esc>:bn<cr>
+noremap         <f8>                <esc>:bad<space>
 
-noremap     <f9>                <esc>:vertical resize -10<cr>
-noremap     <f10>               <esc>:resize -10<cr>
-noremap     <f11>               <esc>:resize +10<cr>
-noremap     <f12>               <esc>:vertical resize +10<cr>
+noremap         <f9>                <esc>:vertical<space>resize<space>-10<cr>
+noremap         <f10>               <esc>:resize<space>-10<cr>
+noremap         <f11>               <esc>:resize<space>+10<cr>
+noremap         <f12>               <esc>:vertical<space>resize<space>+10<cr>
 
-nnoremap <leader>h              <C-W>h
-nnoremap <leader>j              <C-W>j
-nnoremap <leader>k              <C-W>k
-nnoremap <leader>l              <C-W>l
-nnoremap <leader>w              :set wrap!<cr>
+nnoremap        <leader>h           <C-W>h
+nnoremap        <leader>j           <C-W>j
+nnoremap        <leader>k           <C-W>k
+nnoremap        <leader>l           <C-W>l
+nnoremap        <leader>w           :set<space>wrap!<cr>
 
-"   nnoremap    Q                   <nop>
-"   nnoremap    <bs>                <nop>
-"   noremap     <left>              <nop>
-"   noremap     <right>             <nop>
-"   noremap     <up>                <nop>
-"   noremap     <down>              <nop>
+nnoremap        Y                   y$
+nnoremap        <leader>e           :e!<space>~/.vim/vimrc<cr>
+nnoremap        oo                  o<Esc>k
+nnoremap        OO                  O<Esc>j
+nnoremap        <S-H>               ^
+nnoremap        <S-L>               $
+nnoremap        <C-L>               :nohlsearch<cr>:diffupdate<cr>:syntax<space>sync<space>fromstart<cr><c-l>
+inoremap        (*                  ()<esc>i
+inoremap        [*                  []<esc>i
+inoremap        {*                  {}<esc>i
+inoremap        <*                  <><esc>i
+inoremap        '*                  ''<esc>i
+inoremap        "*                  ""<esc>i
+cnoremap        <C-A>               <Home>
+cnoremap        <C-E>               <End>
+cnoremap        <C-K>               <C-U>
+cnoremap        <C-P>               <Up>
+cnoremap        <C-N>               <Down>
+iabbrev         @@                  she3sha3y5@gmail.com
+iabbrev         fn                  Anas<space>M.<space>Sheashaey 
+iabbrev         ssig                --<cr>Anas<space>M.<space>Sheashaey<cr>she3sha3y5@gmail.com<cr>
 
-
-nnoremap    Y                   y$
-nnoremap    <leader>e           :e!<space>~/.vim/vimrc<cr>
-    autocmd! bufwritepost ~/.vim/vimrc source ~/.vim/vimrc
-nnoremap    oo                  o<Esc>k
-nnoremap    OO                  O<Esc>j
-nnoremap    <S-H>               ^
-nnoremap    <S-L>               $
-nnoremap    <C-L>               :nohlsearch<cr>:diffupdate<cr>:syntax sync fromstart<cr><c-l>
-inoremap    (*                  ()<esc>i
-inoremap    [*                  []<esc>i
-inoremap    {*                  {}<esc>i
-inoremap    <*                  <><esc>i
-inoremap    '*                  ''<esc>i
-inoremap    "*                  ""<esc>i
-cnoremap	<C-A>		<Home>
-cnoremap	<C-E>		<End>
-cnoremap	<C-K>		<C-U>
-cnoremap	<C-P>	        <Up>
-cnoremap	<C-N>	        <Down>
-iabbrev     @@                  she3sha3y5@gmail.com
-iabbrev     fn                  Anas M. Sheashaey 
-iabbrev     ssig                --<cr>Anas M. Sheashaey<cr>she3sha3y5@gmail.com<cr>
-
+autocmd! bufwritepost ~/.vim/vimrc source ~/.vim/vimrc
