@@ -14,11 +14,21 @@ adjust_cons_width <- function (out = TRUE) {
 }
 adjust_cons_width(FALSE)
 
+options(prompt = "R>>")
+
 #   UNIX commands
 cd <- setwd
 pwd <- getwd
 h <- utils::head
 man <- utils::help
+
+.First <- function(){
+ cat("Start R", date(), "\n")
+}
+
+.Last <- function(){
+ cat("Close R", date(), "\n", "Don't go to Python or Julia!\n")
+}
 
 #   Change default behaviour of q() to automatically not save workspace
 q <- function(save = "no", ...){
