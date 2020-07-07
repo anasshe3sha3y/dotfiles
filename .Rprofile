@@ -1,5 +1,7 @@
+#   Colorful R output from the console
 library(colorout)
 
+#   read terminal width and pipe it to options(width = .)
 adjust_cons_width <- function (out = TRUE) {
 
     console_width <- system("tput cols", TRUE)
@@ -10,10 +12,25 @@ adjust_cons_width <- function (out = TRUE) {
     }
 
 }
-
 adjust_cons_width(FALSE)
 
+#   UNIX commands
 cd <- setwd
 pwd <- getwd
 h <- utils::head
 man <- utils::help
+
+#   Change default behaviour of q() to automatically not save workspace
+q <- function(save = "no", ...){
+    quit(save = save, ...)
+}
+
+set.seed(1234)
+message("
+ ____    _                                          
+|  _ \\  | | __ _ _ __   __ _ _   _  __ _  __ _  ___ 
+| |_) | | |/ _` | '_ \\ / _` | | | |/ _` |/ _` |/ _ \
+|  _ <  | | (_| | | | | (_| | |_| | (_| | (_| |  __/
+|_| \\_\\ |_|\\__,_|_| |_|\\__, |\\__,_|\\__,_|\\__, |\\___|
+                       |___/             |___/      
+")

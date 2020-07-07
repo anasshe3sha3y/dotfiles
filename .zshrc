@@ -116,3 +116,4 @@ export NNN_BMS='d:~/Documents;D:~/Downloads/;t:~/rtorrent/download/'
 [ -n "$NNNLVL" ] && PS1="N$NNNLVL $PS1"
 alias config='/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME'
 fortune
+alias R="R -q"
