@@ -27,7 +27,8 @@ man <- utils::help
 }
 
 .Last <- function(){
- cat("Close R", date(), "\n", "Don't go to Python or Julia!\n")
+ cat("Close R", date(), "\n",
+        sample(c("Don't go to Python or Julia!", "Excel again??!"), 1), "\n")
 }
 
 #   Change default behaviour of q() to automatically not save workspace
