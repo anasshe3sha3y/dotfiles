@@ -249,6 +249,7 @@ nnoremap        <leader>k           <C-W>k
 nnoremap        <leader>l           <C-W>l
 nnoremap        <leader>w           :set<space>wrap!<cr>
 
+nnoremap        <space>             @q
 nnoremap        Y                   y$
 nnoremap        <leader>e           :e!<space>~/.vim/vimrc<cr>
 nnoremap        oo                  o<Esc>k
