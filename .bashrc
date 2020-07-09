@@ -142,7 +142,6 @@ ex ()
 }
 
 ##me code
-export VISUAL=vim
 export EDITOR="$VISUAL"
 export NNN_USE_EDITOR=1
 export NNN_COLORS='1362'
