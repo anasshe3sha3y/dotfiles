@@ -1,31 +1,42 @@
-set nocompatible
 
 filetype plugin on
 filetype indent on
 syntax on
 colo slate
 
-set autoindent
 set expandtab              " Use spaces instead of tabs.
-set softtabstop =4         " Tab key indents by 4 spaces.
-set shiftwidth  =4         " indents by 4 spaces.
+set softtabstop=4         " Tab key indents by 4 spaces.
+set shiftwidth=4         " indents by 4 spaces.
 set shiftround             " indents to next multiple of 'shiftwidth'.
 
-set backspace   =indent,eol,start  " Make backspace work as you would expect.
 set hidden                 " Switch between buffers without having to save first.
-set laststatus  =2         " Always show statusline.
-set showtabline=2 " Always display the tabline, even if there is only one tab
-set display     =lastline  " Show as much as possible of the last line.
+set showtabline=2         " Always display the tabline, even if there is only one tab
+set display=lastline  " Show as much as possible of the last line.
 
 set noshowmode               " don't Show current mode in command-line.
-set showcmd                " Show already typed keys when more are expected.
 
-set incsearch
-set hlsearch
-set inc=nosplit
+set icm=nosplit
 set ignorecase
 
-set ttyfast                " Faster redrawing.
+if has('vim')
+    set showcmd                " Show already typed keys when more are expected.
+    set laststatus=2         " Always show statusline.
+    set ruler
+    set incsearch
+    set hlsearch
+    set history=500
+    set nocompatible
+    set backspace=indent,eol,start  " backspace work as expected
+    set autoread
+    set autoindent
+    set tf                " Faster redrawing. Depracatede in nvim.
+endif
+
+if has('nvim')
+    set pb=20
+    hi PmenuSel blend=0
+endif
+
 set lazyredraw             " Only redraw when necessary.
 
 set splitbelow
@@ -33,8 +44,8 @@ set splitright
 
 set cursorline
 set wrapscan               " Searches wrap around end-of-file.
-set report      =0         " Always report changed lines.
-set synmaxcol   =200       " Only highlight the first 200 columns.
+set report=0         " Always report changed lines.
+set synmaxcol=200       " Only highlight the first 200 columns.
 set linebreak
 set formatoptions=l
 set breakindent
@@ -43,54 +54,23 @@ set enc=utf-8
 set fileencoding=utf-8
 set fileencodings=ucs-bom,utf-8,prc
 
-" The fish shell is not very compatible to other shells and unexpectedly
-" breaks things that use 'shell'.
-if &shell =~# 'fish$'
-  set shell=/bin/bash
-endif
+set shell=/bin/bash
 
-" Put all temporary files under the same directory.
-" https://github.com/mhinz/vim-galore#handling-backup-swap-undo-and-viminfo-files
-set backup
-set backupdir   =$HOME/.vim/files/backup/
-set backupext   =-vimbackup
-set backupskip  =
-set directory   =$HOME/.vim/files/swap//
-set updatecount =100
+set bdir=$HOME/.vim/files/backup/
+set bex=-vimbackup
+set dir=$HOME/.vim/files/swap//
+set uc=10
 set undofile
-set undodir     =$HOME/.vim/files/undo/
-set viminfo     ='100,n$HOME/.vim/files/info/viminfo
+set udir=$HOME/.vim/files/undo/
+set viminfo='100,n$HOME/.vim/files/info/viminfo
 
 set nu rnu
-set clipboard=unnamedplus
+set cb+=unnamedplus
 set whichwrap=b,s,<,>,[,]     " Traverse line breaks with arrow keys
-set ruler
 set title
-set history=500
-
-" Strip trailing whitespace (,ss)
-function! StripWhitespace()
-    let save_cursor = getpos(".")
-    let old_query = getreg('/')
-    :%s/\s\+$//e
-    call setpos('.', save_cursor)
-    call setreg('/', old_query)
-endfunction
 
 " Set to auto read when a file is changed from the outside
-set autoread
 au FocusGained,BufEnter * checktime
-
-" Emulate Tmux ^az
-function ZoomWindow()
-    let cpos = getpos(".")
-    tabnew %
-    redraw
-    call cursor(cpos[1], cpos[2])
-    normal! zz
-endfunction
-nmap gz :call ZoomWindow()<CR>
-
 
 call plug#begin('~/.vim/plugged')
     Plug 'vim-airline/vim-airline'
@@ -106,18 +86,12 @@ call plug#begin('~/.vim/plugged')
     Plug 'tmhedberg/matchit'
     Plug 'tpope/vim-surround'
     "   Plug 'tpope/vim-fugitive'
-    "   Plug 'neoclide/coc.nvim', {'branch': 'release'}
-    Plug 'ncm2/ncm2'
-    Plug 'ncm2/ncm2-path'
-    Plug 'ncm2/ncm2-bufword'
-    Plug 'gaalcaras/ncm-R'
-    Plug 'roxma/nvim-yarp'
-   "Plug 'SirVer/ultisnips'
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    Plug 'SirVer/ultisnips'
     Plug 'honza/vim-snippets'
     Plug 'chrisbra/csv.vim'
     Plug 'dpelle/vim-LanguageTool'
     Plug 'jalvesaq/Nvim-R', {'branch': 'master'}
-   "Plug 'ncm2/ncm2-ultisnips'
 call plug#end()
 
 
@@ -182,10 +156,6 @@ if has('nvim')
 endif
 
 let g:vimtex_fold_enabled = 1
-"   if !exists('g:ycm_semantic_triggers')
-"     let g:ycm_semantic_triggers = {}
-"   endif
-"   au VimEnter * let g:ycm_semantic_triggers.tex=g:vimtex#re#youcompleteme
 
 """""""""""""""""""""""""""""""""""""""""""
 "                 AIRLINE                 "
@@ -221,23 +191,23 @@ nmap        ga                  <Plug>(EasyAlign)
 "                  NCM2                   "
 """""""""""""""""""""""""""""""""""""""""""
 
-au BufEnter * call ncm2#enable_for_buffer()
-au TextChangedI * call ncm2#auto_trigger()
-set completeopt=noinsert,menuone,noselect
-set shortmess+=c
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+"au BufEnter * call ncm2#enable_for_buffer()
+"au TextChangedI * call ncm2#auto_trigger()
+"set completeopt=noinsert,menuone,noselect
+"set shortmess+=c
+"inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+"inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 """""""""""""""""""""""""""""""""""""""""""
 
 
 noremap         <f1>                <esc>:h<space>
 noremap         <f2>                <esc>:set<space>
-
+noremap         <f3>                <nop>
+noremap         <f4>                <nop>
 noremap         <f5>                <esc>:bd<cr>
 noremap         <f6>                <esc>:bp<cr>
 noremap         <f7>                <esc>:bn<cr>
 noremap         <f8>                <esc>:bad<space>
-
 noremap         <f9>                <esc>:vertical<space>resize<space>-10<cr>
 noremap         <f10>               <esc>:resize<space>-10<cr>
 noremap         <f11>               <esc>:resize<space>+10<cr>
@@ -248,10 +218,11 @@ nnoremap        <leader>j           <C-W>j
 nnoremap        <leader>k           <C-W>k
 nnoremap        <leader>l           <C-W>l
 nnoremap        <leader>w           :set<space>wrap!<cr>
+nnoremap        <leader>e           :e!<space>~/.vim/vimrc<cr>
 
+nnoremap        gz                  :call ZoomWindow()<CR>
 nnoremap        <space>             @q
 nnoremap        Y                   y$
-nnoremap        <leader>e           :e!<space>~/.vim/vimrc<cr>
 nnoremap        oo                  o<Esc>k
 nnoremap        OO                  O<Esc>j
 nnoremap        <S-H>               ^
@@ -273,3 +244,20 @@ iabbrev         fn                  Anas<space>M.<space>Sheashaey
 iabbrev         ssig                --<cr>Anas<space>M.<space>Sheashaey<cr>she3sha3y5@gmail.com<cr>
 
 autocmd! bufwritepost ~/.vim/vimrc source ~/.vim/vimrc
+
+function! StripWhitespace()
+    let save_cursor = getpos(".")
+    let old_query = getreg('/')
+    :%s/\s\+$//e
+    call setpos('.', save_cursor)
+    call setreg('/', old_query)
+endfunction
+
+" Tmux ^az
+function ZoomWindow()
+    let cpos = getpos(".")
+    tabnew %
+    redraw
+    call cursor(cpos[1], cpos[2])
+    normal! zz
+endfunction

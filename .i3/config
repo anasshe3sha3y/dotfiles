@@ -1,6 +1,7 @@
 # Mod1=<Alt>, Mod4=<Super>
 set $mod Mod4
 
+set $TERMINAL alacritty
 # set default desktop layout (default is tiling)
 # workspace_layout tabbed <stacking|tabbed>
 
@@ -22,15 +23,14 @@ font xft:URWGothic-Book 11
 # Use Mouse+$mod to drag floating windows
 floating_modifier $mod
 
-#bindsym $mod+Return exec terminal
-bindsym $mod+Return  exec st
+bindsym $mod+Return exec $TERMINAL
 bindsym $mod+Shift+q kill
 bindsym $mod+d       exec --no-startup-id dmenu_recency
 bindsym $mod+z       exec --no-startup-id morc_menu
 
 ## Alsa -> Pulseaudio ##
 #exec --no-startup-id volumeicon
-#bindsym $mod+Ctrl+m exec st -e 'alsamixer'
+#bindsym $mod+Ctrl+m exec $TERMINAL -e 'alsamixer'
 exec --no-startup-id start-pulseaudio-x11
 exec --no-startup-id pa-applet
 bindsym $mod+Ctrl+m exec pavucontrol
@@ -40,11 +40,11 @@ bindsym $mod+Ctrl+m exec pavucontrol
 # bindsym XF86MonBrightnessUp exec "xbacklight -inc 10; notify-send 'brightness up'"
 # bindsym XF86MonBrightnessDown exec "xbacklight -dec 10; notify-send 'brightness down'"
 
-bindsym $mod+Ctrl+b          exec st -e 'bmenu'
+bindsym $mod+Ctrl+b          exec $TERMINAL -e 'bmenu'
 bindsym $mod+F2              exec firefox
-bindsym $mod+n               exec st -e 'nnn'
+bindsym $mod+n               exec $TERMINAL -e 'nnn'
 bindsym $mod+Shift+F3        exec pcmanfm_pkexec
-bindsym $mod+F5              exec st -e 'mocp'
+bindsym $mod+F5              exec $TERMINAL -e 'mocp'
 bindsym $mod+t               exec --no-startup-id pkill compton
 bindsym $mod+Ctrl+t          exec --no-startup-id compton -b
 bindsym $mod+Shift+d         --release exec "killall dunst; exec notify-send 'restart dunst'"
@@ -53,7 +53,7 @@ bindsym $mod+Print           --release exec --no-startup-id i3-scrot -w
 bindsym $mod+Shift+Print     --release exec --no-startup-id i3-scrot -s
 bindsym $mod+Shift+semicolon exec xdg-open /usr/share/doc/manjaro/i3_help.pdf
 bindsym $mod+Ctrl+x          --release exec --no-startup-id xkill
-bindsym $mod+v               exec st -e 'nvim';exec notify-send 'starting Neovim'
+bindsym $mod+v               exec $TERMINAL -e 'nvim';exec notify-send 'starting Neovim'
 bindsym $mod+p               exec --no-startup-id flash_window
 
 bindsym $mod+h               focus left
@@ -226,7 +226,6 @@ exec_always --no-startup-id ff-theme-util
 exec_always --no-startup-id fix_xcursor
 exec_always --no-startup-id flashfocus
 
-# ~/.Xresources -> https://i3wm.org/docs/userguide.html#xresources
 set_from_resource $term_background background
 set_from_resource $term_foreground foreground
 set_from_resource $term_color0     color0
