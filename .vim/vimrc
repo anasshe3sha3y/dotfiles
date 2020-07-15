@@ -59,7 +59,7 @@ set udir=$HOME/.vim/files/undo/
 set viminfo='100,n$HOME/.vim/files/info/viminfo
 
 set nu rnu
-set cb+=unnamedplus
+set clipboard+=unnamedplus
 set whichwrap=b,s,<,>,[,]     " Traverse line breaks with arrow keys
 set title
 
@@ -78,7 +78,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'tmhedberg/matchit'
     Plug 'tpope/vim-surround'
     Plug 'tpope/vim-fugitive'
-    Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    "lug 'neoclide/coc.nvim', {'branch': 'release'}
     Plug 'SirVer/ultisnips'
     Plug 'honza/vim-snippets'
     Plug 'chrisbra/csv.vim'

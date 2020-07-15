@@ -1,6 +1,3 @@
-#
-# ~/.bashrc
-#
 
 [[ $- != *i* ]] && return
 
@@ -90,14 +87,6 @@ fi
 
 unset use_color safe_term match_lhs sh
 
-alias cp="cp -i"                          # confirm before overwriting something
-alias df='df -h'                          # human-readable sizes
-alias free='free -m'                      # show sizes in MB
-alias np='nano -w PKGBUILD'
-alias more=less
-alias n='nnn -H'
-alias c='clear'
-alias h='history'
 
 xhost +local:root > /dev/null 2>&1
 
@@ -142,11 +131,6 @@ ex ()
 }
 
 ##me code
-export EDITOR="$VISUAL"
-export NNN_USE_EDITOR=1
-export NNN_COLORS='1362'
-[ -n "$NNNLVL" ] && PS1="N$NNNLVL $PS1"
-export PATH=${PATH}:/home/she3o/edirect
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
@@ -162,6 +146,5 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
-alias config='/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME'
-fortune
-alias R="R -q"
+
+source ~/.profile
