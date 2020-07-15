@@ -95,14 +95,14 @@ alias e='exit'
 alias t='tmux'
 alias m='cmatrix -anu 2 -C red'
 alias pmid2bib='pubmed-bibtex'
-export GITHUB_PAT='cb6e4901eb08c1181aadadb95cfbaa3b171131bf'
+#export GITHUB_PAT='cb6e4901eb08c1181aadadb95cfbaa3b171131bf'
 export VISUAL=nvim
 export EDITOR="$VISUAL"
 export NNN_USE_EDITOR=1
 export NNN_COLORS='2361'
 export NNN_PLUG='p:pdfview;v:imageview;d:diff;f:finder;2:dups'
 export NNN_TRASH=1
-export NNN_BMS='d:~/Documents;D:~/Downloads/;t:~/rtorrent/download/'
+export NNN_BMS='c:~/.config/;d:~/Documents;D:~/Downloads/;e:/etc/;P:~/Pictures/;t:~/rtorrent/download/;u:/usr/;v:~/.vim/'
 [ -n "$NNNLVL" ] && PS1="N$NNNLVL $PS1"
 alias config='/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME'
 fortune

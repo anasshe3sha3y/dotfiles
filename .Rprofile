@@ -14,13 +14,13 @@ adjust_cons_width <- function (out = TRUE) {
 }
 adjust_cons_width(FALSE)
 
-options(prompt = "R>> ")
+options(prompt = "R>> ", menu.graphics = FALSE)
 
-#   UNIX commands
-cd <- setwd
-pwd <- getwd
-h <- utils::head
-man <- utils::help
+local({
+  r <- getOption("repos")
+  r["CRAN"] <- "https://cloud.r-project.org/"
+  options(repos = r)
+})
 
 .First <- function(){
  cat("Start R", date(), "\n")
