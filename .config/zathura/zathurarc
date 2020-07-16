@@ -1,10 +1,9 @@
 set selection-clipboard clipboard
 set recolor "true"
-set smooth-scroll true
 set recolor-darkcolor  "#FFFFFF"
-set recolor-lightcolor "#222D31"
-# set statusbar-fg "#000000"
-# set statusbar-bg "#C2BFA5"
+set recolor-lightcolor "#111111"
+set statusbar-fg "#111111"
+set statusbar-bg "#FFFFFF"
 # set inputbar-fg "#FFFFFF"
 # set inputbar-bg "#333333"
 # set completion-highlight-fg "#F0E68C"
