@@ -44,28 +44,43 @@ colors() {
 		echo; echo
 	done
 }
-alias n='nnn -H'
+
+
+
+alias R="radian -q"
+alias alg='alias|grep'
 alias c='clear'
-alias h='history'
-alias v='nvim'
-alias e='exit'
-alias t='tmux'
-alias m='cmatrix -anu 2 -C red'
-alias pmid2bib='pubmed-bibtex'
 alias config='git --git-dir=$HOME/dotfiles/ --work-tree=$HOME'
-alias R="R -q"
+alias e='exit'
+alias grep='grep --color=auto'
+alias h='history'
+alias m='cmatrix -anu 2 -C red'
 alias more=less
-export QT_QPA_PLATFORMTHEME="qt5ct"
-export GTK2_RC_FILES="$HOME/.gtkrc-2.0"
-export NNN_COLORS='2361'
+alias n='nnn -H'
+alias pmid2bib='pubmed-bibtex'
+alias rsync-copy="rsync -avz --progress -h"
+alias rsync-move="rsync -avz --progress -h --remove-source-files"
+alias rsync-synchronize="rsync -avzu --delete --progress -h"
+alias rsync-update="rsync -avzu --progress -h"
+alias t='tmux'
+alias v='nvim'
+alias vi='nvim'
+alias vim='nvim'
 export BROWSER=/usr/bin/brave
-#export GITHUB_PAT='cb6e4901eb08c1181aadadb95cfbaa3b171131bf'
-export VISUAL=nvim
-export EDITOR="$VISUAL"
-export NNN_USE_EDITOR=1
+export EDITOR=nvim
+export GTK2_RC_FILES="$HOME/.gtkrc-2.0"
+export LANG=en_US.UTF-8
+export NNN_BMS='c:~/.config/;d:~/Documents;D:~/Downloads/;e:/etc/;P:~/Pictures/;t:~/rtorrent/download/;u:/usr/;v:~/.vim/'
+export NNN_COLORS='2361'
 export NNN_PLUG='p:pdfview;v:imageview;d:diff;f:finder;2:dups'
 export NNN_TRASH=1
-export NNN_BMS='c:~/.config/;d:~/Documents;D:~/Downloads/;e:/etc/;P:~/Pictures/;t:~/rtorrent/download/;u:/usr/;v:~/.vim/'
-export PATH=${PATH}:/home/she3o/.local/bin/edirect
-[ -n "$NNNLVL" ] && PS1="N$NNNLVL $PS1"
+export NNN_USE_EDITOR=1
+export MANPATH="/usr/local/man:$MANPATH"
+export PATH=${PATH}:/home/she3o/.local/bin/edirect:/home/she3o/bin
+export QT_QPA_PLATFORMTHEME="qt5ct"
+export VISUAL=nvim
+[[ -n "$NNNLVL" ]] && PS1="N$NNNLVL $PS1"
+[[ $0 == "bash" ]] && PS1="\T $PS1"
+[[ $(echo $0|grep -o "zsh") == "zsh" ]] && PS1="%T $PS1"
+
 fortune

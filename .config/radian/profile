@@ -1,0 +1,5 @@
+options(radian.editing_mode = "vi")
+options(radian.highlight_matching_bracket = TRUE)
+options(radian.global_history_file = "~/.local/share/radian/.radian_history")
+options(radian.history_search_ignore_case = TRUE)
+
