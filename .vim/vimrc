@@ -34,9 +34,10 @@ if has('vim')
 endif
 
 
-set lz
-set sb spr
+set lazyredraw
+set splitbelow splitright
 set cursorline
+set signcolumn=yes
 set wrapscan                       " Searches wrap around end-of-file.
 set report=0                       " Always report changed lines.
 set synmaxcol=200                  " Only highlight the first 200 columns.
@@ -53,6 +54,7 @@ set shell=/bin/bash
 set bdir=$HOME/.vim/files/backup/
 set bex=-vimbackup
 set dir=$HOME/.vim/files/swap//
+set updatetime=30
 set uc=10
 set undofile
 set udir=$HOME/.vim/files/undo/
@@ -75,6 +77,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'junegunn/vim-easy-align'
     Plug 'luochen1990/rainbow'
     Plug 'lervag/vimtex'
+    Plug 'ap/vim-css-color'
     Plug 'tmhedberg/matchit'
     Plug 'tpope/vim-surround'
     Plug 'tpope/vim-fugitive'
@@ -110,6 +113,8 @@ inoremap <silent><expr> <TAB>
                 \ coc#refresh()
 
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<CR>"
+
+autocmd CursorHold * silent call CocActionAsync('highlight')
 
 "{{ULTISNIP}}"
 " <tab> Not compatible with Valloric/YouCompleteMe.
@@ -171,8 +176,8 @@ augroup r
 augroup end
 
 "{{EASY_ALIGN}}"
-xmap        ga                  <Plug>(EasyAlign)
-nmap        ga                  <Plug>(EasyAlign)
+xmap        g1                  <Plug>(EasyAlign)
+nmap        g1                  <Plug>(EasyAlign)
 
 """""""""""""""""""""""""""""""""""""""""""
 """""""""""""""""""""""""""""""""""""""""""

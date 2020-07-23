@@ -47,7 +47,7 @@ colors() {
 
 
 
-alias R="radian -q"
+alias R='radian -q'
 alias alg='alias|grep'
 alias c='clear'
 alias config='git --git-dir=$HOME/dotfiles/ --work-tree=$HOME'
@@ -70,7 +70,8 @@ export BROWSER=/usr/bin/brave
 export EDITOR=nvim
 export GTK2_RC_FILES="$HOME/.gtkrc-2.0"
 export LANG=en_US.UTF-8
-export NNN_BMS='c:~/.config/;d:~/Documents;D:~/Downloads/;e:/etc/;P:~/Pictures/;t:~/rtorrent/download/;u:/usr/;v:~/.vim/'
+export LESS=-XF
+export NNN_BMS='c:~/.config/;d:~/Documents;D:~/Downloads/;e:/etc/;l:~/.local;P:~/Pictures/;t:~/rtorrent/download/;u:/usr/;v:~/.vim/'
 export NNN_COLORS='2361'
 export NNN_PLUG='p:pdfview;v:imageview;d:diff;f:finder;2:dups'
 export NNN_TRASH=1
